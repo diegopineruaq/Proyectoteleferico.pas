@@ -1,0 +1,92 @@
+Inicio del programa ControlBoletosTeleferico
+Variables:
+capacidadMaxima: entero;
+opcion: caracter;
+numBoletosGeneral, numBoletosIdaVuelta, numBoletosCancelados, numBoletosNinos,
+numBoletosTerceraEdad: entero;
+montoTotalVentas: real;
+Procedimiento VenderBoletos
+Variables:
+nombre, apellido, cedula, estacion, tramo, tipoBoleto: cadena;
+cantidad, edadNino: entero;
+montoVenta: real;
+Inicio
+Escribir "Venta de boletos:"
+Escribir "Ingrese el nombre: "
+Leer nombre
+Escribir "Ingrese el apellido: "
+Leer apellido
+Escribir "Ingrese la cédula: "
+Leer cedula
+Escribir "Ingrese la estación (1-5): "
+Leer estacion
+Escribir "Ingrese el tramo (A, B, C o D): "
+Leer tramo
+Escribir "Ingrese la cantidad de boletos: "
+Leer cantidad
+Escribir "Ingrese el tipo de boleto (general, ninos, terceraedad): "
+Leer tipoBoleto
+Según tipoBoleto Hacer
+'general':
+montoVenta ← cantidad * 20.0
+numBoletosGeneral ← numBoletosGeneral + cantidad
+'ninos':
+Escribir "Ingrese la edad del niño: "
+Leer edadNino
+Si edadNino <= 3 Entonces
+montoVenta ← 0.0
+SinoSi (edadNino > 3) y (edadNino <= 12) Entonces
+montoVenta ← cantidad * 12.0
+FinSi
+numBoletosNinos ← numBoletosNinos + cantidad
+'terceraedad':
+montoVenta ← cantidad * 12.0
+numBoletosTerceraEdad ← numBoletosTerceraEdad + cantidad
+FinSegún
+montoTotalVentas ← montoTotalVentas + montoVenta
+Escribir "Boletos vendidos exitosamente."
+FinProcedimiento
+Procedimiento VerSistema
+Variables:
+numBoletosDisponibles: entero;
+Inicio
+Escribir "Número de boletos vendidos:"
+Escribir "==========================="
+Escribir "Boletos generales: ", numBoletosGeneral
+Escribir "Boletos sencillos de ida/vuelta: ", numBoletosIdaVuelta
+Escribir "Boletos cancelados: ", numBoletosCancelados
+Escribir "Boletos niños: ", numBoletosNinos
+Escribir "Boletos tercera edad: ", numBoletosTerceraEdad
+numBoletosDisponibles ← capacidadMaxima - numBoletosGeneral - numBoletosIdaVuelta
+Escribir "==========================="
+Escribir "Número de asientos disponibles: ", numBoletosDisponibles
+Escribir "==========================="
+Escribir "Reporte de ventas del día:"
+Escribir "Monto total de las ventas: $", montoTotalVentas:0:2
+FinProcedimiento
+Inicio del programa
+capacidadMaxima ← 60
+opcion ← ' '
+numBoletosGeneral ← 0
+numBoletosIdaVuelta ← 0
+numBoletosCancelados ← 0
+numBoletosNinos ← 0
+numBoletosTerceraEdad ← 0
+montoTotalVentas ← 0.0
+Mientras opcion no sea 's' Hacer
+Escribir "==========================="
+Escribir "Estación de Teleférico de Mérida"
+Escribir "==========================="
+Escribir "Seleccione una opción:"
+Escribir "1. Comprar boletos"
+Escribir "2. Ver sistema"
+Escribir "0. Salir"
+Leer opcion
+Según opcion Hacer
+'1': VenderBoletos()
+'2': VerSistema()
+'0': Escribir "Saliendo del programa..."
+Sino Escribir "Opción inválida. Intente nuevamente."
+FinSegún
+FinMientras
+Fin del programa
